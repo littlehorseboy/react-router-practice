@@ -1,12 +1,69 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import { Route, Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 /* eslint class-methods-use-this: ["error", { "exceptMethods": ["render"] }] */
 
-class About extends React.Component {
+// class Introduction extends React.Component {
+//   render() {
+//     console.log(this.props.match);
+//     return <p>這裡是理念介紹</p>;
+//   }
+// }
+
+// Introduction.propTypes = {
+//   match: PropTypes.object,
+// };
+
+// class History extends React.Component {
+//   render() {
+//     console.log(this.props.match);
+//     return <p>這裡是歷史沿革</p>;
+//   }
+// }
+
+// History.propTypes = {
+//   match: PropTypes.object,
+// };
+
+class AboutContent extends React.Component {
   render() {
-    return <p>這邊是關於我們</p>;
+    console.log(this.props.match);
+    return (
+      <p>
+        {this.props.match.params.type === 'introduction' ? '這裡是理念介紹' : '這裡是歷史沿革'}
+      </p>
+    );
   }
 }
+
+AboutContent.propTypes = {
+  match: PropTypes.object,
+};
+
+class About extends React.Component {
+  render() {
+    console.log(this.props.match);
+    return (
+      <div>
+        <h2>關於我們的選單</h2>
+        <ul>
+          <li>
+            <Link to={`${this.props.match.url}/introduction`}>理念介紹</Link>
+          </li>
+          <li>
+            <Link to={`${this.props.match.url}/history`}>歷史沿革</Link>
+          </li>
+        </ul>
+
+        <Route exact path={`${this.props.match.path}/:type`} component={AboutContent} />
+      </div>
+    );
+  }
+}
+
+About.propTypes = {
+  match: PropTypes.object,
+};
 
 export default About;
