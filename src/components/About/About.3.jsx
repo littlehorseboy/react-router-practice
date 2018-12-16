@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  Route,
-  Link,
-  Switch,
-  Redirect,
-} from 'react-router-dom';
+import { Route, Link, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 /* eslint class-methods-use-this: ["error", { "exceptMethods": ["render"] }] */
@@ -31,11 +26,11 @@ History.propTypes = {
   match: PropTypes.object,
 };
 
-// class NoPage extends React.Component {
-//   render() {
-//     return <p>頁面維護中...</p>;
-//   }
-// }
+class NoPage extends React.Component {
+  render() {
+    return <p>頁面維護中...</p>;
+  }
+}
 
 class About extends React.Component {
   render() {
@@ -57,8 +52,7 @@ class About extends React.Component {
         <Switch>
           <Route exact path={this.props.match.url} component={Introduction} />
           <Route path={`${this.props.match.url}/history`} component={History} />
-          {/* <Route component={NoPage} /> */}
-          <Redirect from={`${this.props.match.path}/story`} to={`${this.props.match.url}/history`} />
+          <Route component={NoPage} />
         </Switch>
       </div>
     );
