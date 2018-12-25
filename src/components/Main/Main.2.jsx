@@ -14,27 +14,7 @@ class Hello extends React.Component {
 }
 
 Hello.propTypes = {
-  match: PropTypes.object,
-};
-
-class CustomLink extends React.Component {
-  render() {
-    return (
-      <Route path={this.props.to} children={(props) => {
-        console.log(props.match);
-        return (
-          <li>
-            {props.match ? '>' : ''}
-            <Link to={this.props.to}>{this.props.name}</Link>
-          </li>
-        );
-      }} />
-    );
-  }
-}
-
-CustomLink.propTypes = {
-  to: PropTypes.string,
+  match: PropTypes.func,
 };
 
 class Main extends React.Component {
@@ -44,10 +24,18 @@ class Main extends React.Component {
         <div>
           <Title title="功能選單" />
           <ul>
-            <CustomLink to="/" name="回到首頁"></CustomLink>
-            <CustomLink to="/about" name="關於我們"></CustomLink>
-            <CustomLink to="/hello/horse" name="用 Component 渲染組件"></CustomLink>
-            <CustomLink to="/hey/QQ" name="用 render 渲染組件"></CustomLink>
+            <li>
+              <Link to="/">回到首頁</Link>
+            </li>
+            <li>
+              <Link to="/about">關於我們</Link>
+            </li>
+            <li>
+              <Link to="/hello/horse">用 Component 渲染組件</Link>
+            </li>
+            <li>
+              <Link to="/hey/QQ">用 render 渲染組件</Link>
+            </li>
           </ul>
 
           <hr />
